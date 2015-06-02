@@ -1,0 +1,61 @@
+cdist-type__ungleich_ssh_access_group_based(7)
+==============================================
+ungleich GmbH <cdist--@--ungleich.ch>
+
+
+NAME
+----
+cdist-type__ungleich_ssh_access_group_based - Manage ssh access in groups
+
+
+DESCRIPTION
+-----------
+This cdist type allows management of ssh access based on
+groups for different users.
+
+Groups are resembled by directories below files/.
+Every public key must end in '.pub'.
+
+REQUIRED PARAMETERS (MULTIPLE)
+------------------------------
+group::
+    Specify groups to grant/deny access to.
+
+
+OPTIONAL PARAMETERS
+-------------------
+state::
+    present or absent, defaults to present
+
+user::
+    Select user to operate on. Defaults to object id.
+
+EXAMPLES
+--------
+
+--------------------------------------------------------------------------------
+# grant access to group teralytics, user root
+__ungleich_ssh_access_group_based root --group staff --state present
+
+# grant access to group energy, user vpn
+__ungleich_ssh_access_group_based vpn --group vpnstaff --state present
+
+# Allow to groups
+__ungleich_ssh_access_group_based vpn --group staff \
+    --group vpnstaff --state present
+
+# Remove access to vpn for some other group
+__ungleich_ssh_access_group_based vpn --group novpn --state absent
+--------------------------------------------------------------------------------
+
+
+SEE ALSO
+--------
+- cdist-type(7)
+
+
+COPYING
+-------
+Copyright \(C) 2014-2015 ungleich GmbH (www.ungleich.ch). 
+Free use of this software is granted under the terms 
+of the GNU General Public License version 3 (GPLv3).
